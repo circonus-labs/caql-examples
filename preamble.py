@@ -10,7 +10,7 @@ from matplotlib import pyplot as plt
 
 from circonusapi import circonusdata
 
-with open(os.path.expanduser("/work/.circonusrc.json"),"r") as fh:
+with open(os.path.expanduser("~/host/home/.circonusrc.json"),"r") as fh:
     config = json.load(fh)
 
 def hist_plot(H,**kwargs):
@@ -29,7 +29,7 @@ def caql_plot(account, *args,**kwargs):
     df=pd.DataFrame(data)
     df['time']=pd.to_datetime(df['time'],unit='s')
     df.set_index('time', inplace=True)
-    return df.plot(figsize=(20,5), legend=False, lw=.8, **kwargs)
+    return df.plot(figsize=(20,5), legend=False, lw=.8, ls="steps", **kwargs)
 
 def caql_hist_plot(account, *args, **kwargs):
     fig=plt.figure(figsize=(20,5))
