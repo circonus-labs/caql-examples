@@ -23,8 +23,13 @@ def hist_plot(H,**kwargs):
         w.append(b.width())
     return plt.bar(x,h,w,**kwargs)
 
+def caql(account, *args):
+    circ = circonusdata.CirconusData(config[account])
+    return circ.caql(*args)
+
 def caql_plot(account, *args,**kwargs):
     circ = circonusdata.CirconusData(config[account])
+    circ._api.debug = False
     data=circ.caql(*args)
     df=pd.DataFrame(data)
     df['time']=pd.to_datetime(df['time'],unit='s')
